@@ -8,7 +8,8 @@
     # def for quiz displayer
 
 import tkinter as tk
-
+from quiz_creator_ import QuizCreatorWindow
+from quiz_displayer_ import QuizDisplayerWindow
 
 class MainMenu:
     def __init__(self):
@@ -24,10 +25,13 @@ class MainMenu:
         self.root.mainloop()
 
     def open_quiz_creator(self):
-        pass
+        self.root.destroy()
+        QuizCreatorWindow().run()
+
 
     def open_quiz_displayer(self):
-        pass
+        self.root.destroy()
+        QuizDisplayerWindow().run()
 
 if __name__ == "__main__":
     MainMenu()
