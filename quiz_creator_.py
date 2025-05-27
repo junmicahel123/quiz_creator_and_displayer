@@ -11,83 +11,98 @@
 
 import tkinter as tk
 from tkinter import messagebox
-questions = []
+import main  # assuming this is your main menu module
 
+class QuizCreatorWindow:
+    def __init__(self):
+        self.questions = []
 
-def add_question():
-    question = question_entry.get()
-    choices = [entry.get() for entry in choice_entries]
-    correct = correct_answer.get().strip().lower()
+        self.root = tk.Tk()
+        self.root.title("Quiz Question Creator")
+        self.root.geometry("450x500")
+        self.root.configure(bg="#f0f4f7")
 
-    if not question or any(not c for c in choices) or correct not in ['a', 'b', 'c', 'd']:
-        messagebox.showwarning("Input Error", "Please complete all fields and choose a valid correct answer (a-d).")
-        return
+        header = tk.Label(self.root, text="QUIZ QUESTION CREATOR", font=("Arial", 16, "bold"),
+                          bg="#2c3e50", fg="white", pady=10)
+        header.pack(fill="x")
 
-    questions.append({
-        'Question': question,
-        'Choices': choices,
-        'Correct Answer': correct
-    })
+        main_frame = tk.Frame(self.root, bg="#f0f4f7", padx=20, pady=20)
+        main_frame.pack(fill="both", expand=True)
 
-    # Clear input fields
-    question_entry.delete(0, tk.END)
-    for entry in choice_entries:
-        entry.delete(0, tk.END)
-    correct_answer.delete(0, tk.END)
+        tk.Label(main_frame, text="Enter your question:", font=("Arial", 11), bg="#f0f4f7").pack(anchor="w")
+        self.question_entry = tk.Entry(main_frame, width=50, font=("Arial", 10))
+        self.question_entry.pack(pady=5)
 
-    messagebox.showinfo("Saved", "Question added!")
+        self.choice_entries = []
+        for i in range(4):
+            tk.Label(main_frame, text=f"Choice {chr(97 + i)}:", font=("Arial", 11), bg="#f0f4f7").pack(anchor="w")
+            entry = tk.Entry(main_frame, width=50, font=("Arial", 10))
+            entry.pack(pady=2)
+            self.choice_entries.append(entry)
 
-def finish():
-    if not questions:
-        messagebox.showwarning("No Questions", "You haven't added any questions yet.")
-        return
+        tk.Label(main_frame, text="Correct answer (a, b, c, d):", font=("Arial", 11),
+                 bg="#f0f4f7").pack(anchor="w", pady=(10, 0))
+        self.correct_answer = tk.Entry(main_frame, width=5, font=("Arial", 10))
+        self.correct_answer.pack(pady=5)
 
-    with open('quiz_creator_datas.txt', 'w') as file:
-        for i, q in enumerate(questions, 1):
-            file.write(f"Question {i}: {q['Question']}\n")
-            file.write(f"   a) {q['Choices'][0]}\n")
-            file.write(f"   b) {q['Choices'][1]}\n")
-            file.write(f"   c) {q['Choices'][2]}\n")
-            file.write(f"   d) {q['Choices'][3]}\n")
-            file.write(f"Correct Answer: {q['Correct Answer']}\n\n")
+        button_style = {"font": ("Arial", 11), "width": 20, "bd": 0,
+                        "relief": "ridge", "cursor": "hand2", "padx": 5, "pady": 5}
 
-    messagebox.showinfo("Saved", "All questions saved to quiz_creator_data_.txt")
-    root.destroy()
+        add_btn = tk.Button(main_frame, text="➕ Add Question", command=self.add_question,
+                            bg="#27ae60", fg="white", **button_style)
+        add_btn.pack(pady=10)
 
-    
-root = tk.Tk()
-root.title("Quiz Question Creator")
-root.geometry("450x500")
-root.configure(bg="#f0f4f7")
+        finish_btn = tk.Button(main_frame, text="💾 Finish & Save", command=self.finish,
+                               bg="#2980b9", fg="white", **button_style)
+        finish_btn.pack()
 
-header = tk.Label(root, text="QUIZ QUESTION CREATOR", font=("Arial", 16, "bold"), bg="#2c3e50", fg="white", pady=10)
-header.pack(fill="x")
+        back_btn = tk.Button(main_frame, text="↩️ Back to Main Menu", command=self.back_to_main_menu,
+                             bg="#e67e22", fg="white", **button_style)
+        back_btn.pack(pady=10)
 
-main_frame = tk.Frame(root, bg="#f0f4f7", padx=20, pady=20)
-main_frame.pack(fill="both", expand=True)
+    def run(self):
+        self.root.mainloop()
 
-tk.Label(main_frame, text="Enter your question:", font=("Arial", 11), bg="#f0f4f7").pack(anchor="w")
-question_entry = tk.Entry(main_frame, width=50, font=("Arial", 10))
-question_entry.pack(pady=5)
+    def add_question(self):
+        question = self.question_entry.get()
+        choices = [entry.get() for entry in self.choice_entries]
+        correct = self.correct_answer.get().strip().lower()
 
-choice_entries = []
-for i in range(4):
-    tk.Label(main_frame, text=f"Choice {chr(97 + i)}:", font=("Arial", 11), bg="#f0f4f7").pack(anchor="w")
-    entry = tk.Entry(main_frame, width=50, font=("Arial", 10))
-    entry.pack(pady=2)
-    choice_entries.append(entry)
+        if not question or any(not c for c in choices) or correct not in ['a', 'b', 'c', 'd']:
+            messagebox.showwarning("Input Error", "Please complete all fields and choose a valid correct answer (a-d).")
+            return
 
-tk.Label(main_frame, text="Correct answer (a, b, c, d):", font=("Arial", 11), bg="#f0f4f7").pack(anchor="w", pady=(10,0))
-correct_answer = tk.Entry(main_frame, width=5, font=("Arial", 10))
-correct_answer.pack(pady=5)
+        self.questions.append({
+            'Question': question,
+            'Choices': choices,
+            'Correct Answer': correct
+        })
 
-button_style = {"font": ("Arial", 11), "width": 20, "bd": 0, "relief": "ridge", "cursor": "hand2", "padx": 5, "pady": 5}
+        self.question_entry.delete(0, tk.END)
+        for entry in self.choice_entries:
+            entry.delete(0, tk.END)
+        self.correct_answer.delete(0, tk.END)
 
-add_btn = tk.Button(main_frame, text="➕ Add Question", command=add_question, bg="#27ae60", fg="white", **button_style)
-add_btn.pack(pady=10)
+        messagebox.showinfo("Saved", "Question added!")
 
-finish_btn = tk.Button(main_frame, text="💾 Finish & Save", command=finish, bg="#2980b9", fg="white", **button_style)
-finish_btn.pack()
+    def finish(self):
+        if not self.questions:
+            messagebox.showwarning("No Questions", "You haven't added any questions yet.")
+            return
 
-root.mainloop()
-         
+        with open('quiz_creator_datas.txt', 'w') as file:
+            for i, q in enumerate(self.questions, 1):
+                file.write(f"Question {i}: {q['Question']}\n")
+                file.write(f"   a) {q['Choices'][0]}\n")
+                file.write(f"   b) {q['Choices'][1]}\n")
+                file.write(f"   c) {q['Choices'][2]}\n")
+                file.write(f"   d) {q['Choices'][3]}\n")
+                file.write(f"Correct Answer: {q['Correct Answer']}\n\n")
+
+        messagebox.showinfo("Saved", "All questions saved to quiz_creator_datas.txt")
+        self.root.destroy()
+
+    def back_to_main_menu(self):
+        self.root.destroy()
+        main.MainMenu()
+
