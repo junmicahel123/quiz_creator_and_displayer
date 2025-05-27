@@ -10,3 +10,24 @@
 import tkinter as tk
 
 
+class MainMenu:
+    def __init__(self):
+        self.root = tk.Tk()
+        self.root.title("Main Menu")
+        self.root.geometry("300x200")
+        
+        tk.Label(self.root, text="Choose an option:", font=("Arial", 14)).pack(pady=20)
+        
+        tk.Button(self.root, text="Quiz Creator", command=self.open_quiz_creator, width=20).pack(pady=5)
+        tk.Button(self.root, text="Quiz Displayer", command=self.open_quiz_displayer, width=20).pack(pady=5)
+        
+        self.root.mainloop()
+
+    def open_quiz_creator(self):
+        pass
+
+    def open_quiz_displayer(self):
+        pass
+
+if __name__ == "__main__":
+    MainMenu()
