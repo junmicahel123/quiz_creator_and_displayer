@@ -86,4 +86,4 @@ class QuizDisplayerWindow:
 
     def back_to_main_menu(self):
         self.root.destroy()
-        main.MainMenu()
+        
