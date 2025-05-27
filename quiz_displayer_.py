@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import random
-import main  # your main menu module
+
 
 class QuizDisplayerWindow:
     def __init__(self):
