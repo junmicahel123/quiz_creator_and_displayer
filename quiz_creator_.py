@@ -11,7 +11,7 @@
 
 import tkinter as tk
 from tkinter import messagebox
-import main 
+import quiz_creator_displayer_ as main
 
 class QuizCreatorWindow:
     def __init__(self):
