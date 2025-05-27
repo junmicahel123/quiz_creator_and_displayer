@@ -1,0 +1,42 @@
+Question 1: what color is the sky?
+   a) rainbow
+   b) apple
+   c) red
+   d) blue
+Correct Answer: d
+
+Question 2: What color is the sea?
+   a) blue
+   b) pink
+   c) red
+   d) blood red
+Correct Answer: a
+
+Question 3: How many meters is in 1km?
+   a) 1000
+   b) 100000000
+   c) 10
+   d) 2
+Correct Answer: a
+
+Question 4: How many km is a marathon?
+   a) 42
+   b) 423
+   c) 100
+   d) 10
+Correct Answer: a
+
+Question 5: Can humans fly?
+   a) no
+   b) yes
+   c) yes and yes
+   d) probably
+Correct Answer: a
+
+Question 6: What is the color of a ripe banana
+   a) pink
+   b) red
+   c) green
+   d) yellow
+Correct Answer: d
+
