@@ -11,7 +11,7 @@
 
 import tkinter as tk
 from tkinter import messagebox
-import quiz_creator_displayer_ as main
+
 
 class QuizCreatorWindow:
     def __init__(self):
@@ -104,5 +104,5 @@ class QuizCreatorWindow:
 
     def back_to_main_menu(self):
         self.root.destroy()
-        main.MainMenu()
-
+       
+       
