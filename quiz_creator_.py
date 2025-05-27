@@ -11,7 +11,7 @@
 
 import tkinter as tk
 from tkinter import messagebox
-import main  # assuming this is your main menu module
+import main 
 
 class QuizCreatorWindow:
     def __init__(self):
