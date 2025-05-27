@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import random
-
+import quiz_creator_displayer_ as main
 
 class QuizDisplayerWindow:
     def __init__(self):
@@ -86,4 +86,4 @@ class QuizDisplayerWindow:
 
     def back_to_main_menu(self):
         self.root.destroy()
-        
+        main.MainMenu()
